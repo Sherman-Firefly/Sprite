@@ -39,8 +39,7 @@ class Sprite(pygame.sprite.Sprite):
         self.image.fill(random.choice([white, yellow, green]))
 
 def cbg():
-    global bgc
-    bgc=random.choice([blue, lblue, dblue])
+    return random.choice([blue, lblue, dblue])
 
 asl=pygame.sprite.Group()
 st1=Sprite(white, 10, 20)
@@ -49,6 +48,8 @@ st1.rect.y=random.randint(0,450)
 asl.add(st1)
 
 screen=pygame.display.set_mode((500,500))
+clock = pygame.time.Clock()
+
 done=False
 bg_color = blue
 while not done:
@@ -58,11 +59,15 @@ while not done:
         elif event.type== scce:
             st1.cc()
         elif event.type==bcce:
-            cbg()
+            bg_color=cbg()
     asl.update()
     screen.fill(bg_color)
     asl.draw(screen)
-    pygame.draw.rect(screen, (0,125,255), pygame.Rect(30,30,60,60))
+
+    clock.tick(250)
+
 
     pygame.display.flip()
+pygame.quit()
+
 
